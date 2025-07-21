@@ -1,103 +1,186 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Facebook, Instagram, Youtube } from "lucide-react";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/nextjs";
+
+const products = [
+  {
+    id: 1,
+    name: "Performance Air Intake",
+    price: 199.99,
+    image: "/placeholder.svg",
+  },
+  {
+    id: 2,
+    name: "High-Flow Exhaust",
+    price: 499.0,
+    image: "/placeholder.svg",
+  },
+  {
+    id: 3,
+    name: "Racing Spark Plugs",
+    price: 59.49,
+    image: "/placeholder.svg",
+  },
+  {
+    id: 4,
+    name: "Turbocharger Kit",
+    price: 2599.99,
+    image: "/placeholder.svg",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <>
+      {/* Navbar */}
+      <header className="w-full bg-white shadow">
+        <div className="container mx-auto flex items-center justify-between px-4 py-4">
+          <Link href="/" className="text-xl font-semibold">
+            AHF Auto&nbsp;Parts
+          </Link>
+          <nav className="hidden gap-6 md:flex">
+            <Link href="/" className="hover:text-primary">
+              Home
+            </Link>
+            <Link href="/shop" className="hover:text-primary">
+              Shop
+            </Link>
+            <Link href="/about" className="hover:text-primary">
+              About
+            </Link>
+            <Link href="/contact" className="hover:text-primary">
+              Contact
+            </Link>
+          </nav>
+          <div>
+            <SignedOut>
+              <SignInButton mode="modal">
+                <Button size="sm">Login</Button>
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton afterSignOutUrl="/" />
+            </SignedIn>
+          </div>
         </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="container mx-auto px-4 py-10">
+        {/* Hero */}
+        <section className="mb-12 text-center">
+          <h1 className="text-4xl font-bold">AHF Auto Parts</h1>
+          <p className="mt-2 text-lg text-gray-600">
+            Quality performance parts delivered fast.
+          </p>
+        </section>
+
+        {/* Products */}
+        <section className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {products.map((p) => (
+            <div
+              key={p.id}
+              className="flex flex-col items-center rounded-lg border p-4 shadow-sm transition-shadow hover:shadow-md"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={p.image}
+                alt={p.name}
+                className="mb-4 h-32 w-32 object-cover"
+              />
+              <h2 className="font-medium">{p.name}</h2>
+              <p className="text-sm text-gray-500">${p.price.toFixed(2)}</p>
+            </div>
+          ))}
+        </section>
+
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      {/* Footer */}
+      <footer className="bg-gray-100">
+        <div className="container mx-auto grid gap-8 px-4 py-10 sm:grid-cols-2 md:grid-cols-4">
+          <div>
+            <Link href="/" className="text-lg font-semibold">
+              AHF Auto&nbsp;Parts
+            </Link>
+            <p className="mt-2 text-sm text-gray-600 max-w-xs">
+              Your trusted source for high-performance automotive parts
+              delivered fast and at unbeatable prices.
+            </p>
+            <div className="mt-4 flex gap-4">
+              <Link href="#" aria-label="Instagram" className="hover:text-primary">
+                <Instagram className="h-5 w-5" />
+              </Link>
+              <Link href="#" aria-label="Facebook" className="hover:text-primary">
+                <Facebook className="h-5 w-5" />
+              </Link>
+              <Link href="#" aria-label="Youtube" className="hover:text-primary">
+                <Youtube className="h-5 w-5" />
+              </Link>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <h3 className="font-medium">Quick Links</h3>
+            <Link href="/" className="block hover:text-primary">
+              Home
+            </Link>
+            <Link href="/shop" className="block hover:text-primary">
+              Shop
+            </Link>
+            <Link href="/about" className="block hover:text-primary">
+              About
+            </Link>
+            <Link href="/contact" className="block hover:text-primary">
+              Contact
+            </Link>
+          </div>
+
+          <div className="space-y-2">
+            <h3 className="font-medium">Categories</h3>
+            <Link href="/category/performance" className="block hover:text-primary">
+              Performance
+            </Link>
+            <Link href="/category/exhaust" className="block hover:text-primary">
+              Exhaust
+            </Link>
+            <Link href="/category/suspension" className="block hover:text-primary">
+              Suspension
+            </Link>
+            <Link href="/category/brakes" className="block hover:text-primary">
+              Brakes
+            </Link>
+            <Link href="/category/wheels" className="block hover:text-primary">
+              Wheels
+            </Link>
+          </div>
+
+          <div className="space-y-2">
+            <h3 className="font-medium">Newsletter</h3>
+            <p className="text-sm text-gray-600">
+              Join our mailing list for exclusive offers.
+            </p>
+            <form className="flex max-w-xs items-center gap-2">
+              <input
+                type="email"
+                placeholder="Email address"
+                className="w-full flex-1 rounded border px-3 py-2 text-sm focus:outline-none"
+              />
+              <Button size="sm">Subscribe</Button>
+            </form>
+          </div>
+        </div>
+
+        <div className="border-t bg-gray-100 py-4 text-center text-sm text-gray-600">
+          © 2025 All rights reserved.
+        </div>
       </footer>
-    </div>
+    </>
   );
 }

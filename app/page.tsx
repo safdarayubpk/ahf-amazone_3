@@ -144,20 +144,20 @@ export default function Home() {
 
           <div className="space-y-2">
             <h3 className="font-medium">Categories</h3>
-            <Link href="/category/performance" className="block hover:text-primary">
-              Performance
+            <Link href="/category/engine-performance" className="block hover:text-primary">
+              Engine &amp; Performance
             </Link>
-            <Link href="/category/exhaust" className="block hover:text-primary">
-              Exhaust
+            <Link href="/category/suspension-steering-brakes" className="block hover:text-primary">
+              Suspension, Steering &amp; Brakes
             </Link>
-            <Link href="/category/suspension" className="block hover:text-primary">
-              Suspension
+            <Link href="/category/electrical-lighting" className="block hover:text-primary">
+              Electrical &amp; Lighting
             </Link>
-            <Link href="/category/brakes" className="block hover:text-primary">
-              Brakes
+            <Link href="/category/body-exterior" className="block hover:text-primary">
+              Body &amp; Exterior
             </Link>
-            <Link href="/category/wheels" className="block hover:text-primary">
-              Wheels
+            <Link href="/category/interior-comfort-safety" className="block hover:text-primary">
+              Interior, Comfort &amp; Safety
             </Link>
           </div>
 

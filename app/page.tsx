@@ -111,7 +111,7 @@ export default function Home() {
             </Link>
             <p className="mt-2 text-sm text-gray-600 max-w-xs">
               Your trusted source for high-performance automotive parts
-              delivered fast and at unbeatable prices.This is a test.
+              delivered fast and at unbeatable prices.
             </p>
             <div className="mt-4 flex gap-4">
               <Link href="#" aria-label="Instagram" className="hover:text-primary">
